@@ -6,12 +6,24 @@ import Loader from "../layout/Loader/Loader";
 import ProductCard from "../Home/ProductCard";
 import { useParams } from 'react-router-dom';
 import Pagination from "react-js-pagination";
-
+import Typography from "@material-ui/core/Typography";
+import Slider from "@material-ui/core/Slider";
+const categories = [
+    "Laptop",
+    "Footwear",
+    "Bottom",
+    "Tops",
+    "Attire",
+    "Camera",
+    "SmartPhones",
+  ];
 function Products() {
     const dispatch = useDispatch();
 
     const [currentPage, setCurrentPage] = useState(1);
-    const {error, loading, products, productsCount, resultPerPage} = useSelector(
+    const [price, setPrice] = useState([0, 25000]);
+    const [category, setCategory] = useState("");
+    const {error, loading, products, productsCount, resultPerPage,filteredProductsCount} = useSelector(
         state => state.products
     )
 
@@ -22,14 +34,17 @@ function Products() {
     const setCurrentPageNo = (e) => {
         setCurrentPage(e);
       };
+    const priceHandler = (event, newPrice) => {
+        setPrice(newPrice);
+    };
 
 
     useEffect(() => {
-        dispatch(getProduct(keyword, currentPage))
-    }, [dispatch, keyword, currentPage])
+        dispatch(getProduct(keyword, currentPage, price, category))
+    }, [dispatch, keyword, currentPage, price, category])
 
 
-
+    let count = filteredProductsCount;
   return (
     <Fragment>
         {loading ? <Loader /> : (
@@ -42,7 +57,33 @@ function Products() {
                 <ProductCard key={product._id} product={product} />
                 ))}
             </div>
-            {resultPerPage < productsCount && (
+            <div className="filterBox">
+                <Typography>Price</Typography>
+                <Slider
+                    value={price}
+                    onChange={priceHandler}
+                    valueLabelDisplay="auto"
+                    aria-labelledby="range-slider"
+                    min={0}
+                    max={25000}
+                />            
+             <Typography>Categories</Typography>
+                <ul className="categoryBox">
+                    {categories.map((category) => (
+                        <li
+                        className="category-link"
+                        key={category}
+                        onClick={() => setCategory(category)}
+                        >
+                        {category}
+                        </li>
+                    ))}
+                </ul>           
+             </div>
+
+
+
+            {resultPerPage < count && (
             <div className="paginationBox">
                 <Pagination
                     activePage={currentPage}
