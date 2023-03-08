@@ -10,7 +10,7 @@ import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import { useNavigate } from 'react-router-dom';
 
-import Profile from "../../images/Profile.png"
+
 function LoginSignUp() {
     const navigate = useNavigate()
     //setting up the redux actions
@@ -51,7 +51,7 @@ function LoginSignUp() {
         if(isAuthenticated){
             navigate("/account")
         }
-    }, [dispatch, error, alert, isAuthenticated])
+    }, [dispatch, error, alert, isAuthenticated, navigate])
 
 
     //avatar of the given user

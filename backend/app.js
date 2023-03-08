@@ -3,10 +3,12 @@ const express = require("express");
 const cors = require("cors");
 //set up express 
 const app = express();
+const fileUpload = require("express-fileupload");
+
 app.use(cors())
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
-
+app.use(fileUpload());
 const errorMiddleWear = require("./middlewear/error")
 //require body parser
 const bodyParser = require("body-parser")
