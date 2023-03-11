@@ -3,7 +3,7 @@ import './App.css';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import WebFont from "webfontloader";
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 
 import Header from './component/layout/Header/Header.js';
 import Footer from './component/layout/Footer/Footer.js';
@@ -15,15 +15,15 @@ import LoginSignUp from './component/User/LoginSignUp';
 import store from "./store.js";
 import { loadUser } from './actions/userAction.js';
 import UserOptions from "./component/layout/Header/UserOptions.js";
-import { useSelector } from 'react-redux';
-
-
+import { useSelector, useDispatch } from "react-redux";
+import Profile from "./component/User/Profile.jsx"
+import Loader from './component/layout/Loader/Loader';
 
 function App() {
-  //accesing the state
-  const {user, isAuthenticated} = useSelector(state => state.user)
-
-
+  //accesing the 
+  
+  const { user, loading, isAuthenticated } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   //use effect
   useEffect(() => {
@@ -33,25 +33,35 @@ function App() {
       },
     });
 
-    store.dispatch(loadUser());
-  }, []);
+      
+       dispatch(loadUser());
+    
+  }, [dispatch]);
+
 
   return (
-
-    <Router>
-      <Header />
-        {isAuthenticated && <UserOptions user={user} />}
-        <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='/product/:id' element={<ProductDetails />} />
-          <Route exact path='/products' element={<Products />} />
-          <Route exact path='/products/:keyword' element={<Products />} />
-          <Route exact path='/search' element={<Search />} />
-          <Route exact path = '/login' element={<LoginSignUp />} />
-        </Routes>
-      <Footer />
-    </Router>
-
+    <Fragment>
+      {loading ? (
+        <Loader />
+      ) : (
+      <Router>
+        <Header />
+          {isAuthenticated && <UserOptions user={user} />}
+          <Routes>
+            <Route exact path='/' element={<Home />} />
+            <Route exact path='/product/:id' element={<ProductDetails />} />
+            <Route exact path='/products' element={<Products />} />
+            <Route exact path='/products/:keyword' element={<Products />} />
+            <Route exact path='/search' element={<Search />} />
+            <Route exact path = '/login' element={<LoginSignUp />} />
+            <Route exact path = '/account' element={<Profile />} />
+            
+          </Routes>
+        <Footer />
+      </Router>
+       )
+       }
+     </Fragment>
 
 
 
