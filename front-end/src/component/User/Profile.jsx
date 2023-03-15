@@ -9,13 +9,14 @@ import "./Profile.css";
 const Profile = () => {
 
  const navigate = useNavigate()
+ const dispatch = useDispatch()
  const { user, loading, isAuthenticated } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (isAuthenticated === false) {
         navigate("/login");
     }
-  }, [navigate, isAuthenticated]);
+  }, [navigate]);
 
 
   return (

@@ -14,11 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 function UserOptions({user}) {
 
-    const [open, setOpen] = useState();
+    const [open, setOpen] = useState(false);
     const navigate = useNavigate();
     const alert = useAlert();
     const dispatch = useDispatch();
-    
     //map through all the fuctions
     const options = [
         { icon: <ListAltIcon />, name: "Orders", func: orders },
@@ -65,7 +64,7 @@ function UserOptions({user}) {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             style={{ zIndex: "11" }}
-            open={open}s
+            open={open}
             direction="down"
             className="speedDial"
             icon={

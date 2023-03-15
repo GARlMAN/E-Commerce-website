@@ -2,6 +2,7 @@
 import './App.css';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import WebFont from "webfontloader";
 import { Fragment, useEffect } from 'react';
 
@@ -18,6 +19,8 @@ import UserOptions from "./component/layout/Header/UserOptions.js";
 import { useSelector, useDispatch } from "react-redux";
 import Profile from "./component/User/Profile.jsx"
 import Loader from './component/layout/Loader/Loader';
+import UpdateProfile from "./component/User/UpdateProfile.jsx";
+import UpdatePassword from "./component/User/UpdatePassword.jsx";
 
 function App() {
   //accesing the 
@@ -54,7 +57,9 @@ function App() {
             <Route exact path='/products/:keyword' element={<Products />} />
             <Route exact path='/search' element={<Search />} />
             <Route exact path = '/login' element={<LoginSignUp />} />
-            <Route exact path = '/account' element={<Profile />} />
+            {user && <Route exact path = '/account' element={<Profile />} />}
+            {user && <Route exact path = '/me/update' element={<UpdateProfile />} />}
+            {user && <Route exact path = '/password/update' element={<UpdatePassword />} />}
             
           </Routes>
         <Footer />
