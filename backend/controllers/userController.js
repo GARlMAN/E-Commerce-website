@@ -93,7 +93,7 @@ exports.loginUser = CatchAsyncError(async(req, res, next) => {
 
     await user.save({validateBeforeSave: false});
     console.log(restPasswordToken)
-    const resetPasswordURL  = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${restPasswordToken}`;
+    const resetPasswordURL  = `${process.env.FRONTEND_URL}/password/reset/${restPasswordToken}`;
     const message = `Your reset token is :- \n\n ${resetPasswordURL}\n\n if you have not requested this email then please ignore it`;
 
     try{

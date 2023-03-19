@@ -21,6 +21,10 @@ import Profile from "./component/User/Profile.jsx"
 import Loader from './component/layout/Loader/Loader';
 import UpdateProfile from "./component/User/UpdateProfile.jsx";
 import UpdatePassword from "./component/User/UpdatePassword.jsx";
+import ForgotPassword from "./component/User/ForgotPassword.jsx"; 
+import ResetPassword from "./component/User/ResetPassword.jsx";
+import Cart from "./component/Cart/Cart.jsx";
+
 
 function App() {
   //accesing the 
@@ -60,7 +64,9 @@ function App() {
             {user && <Route exact path = '/account' element={<Profile />} />}
             {user && <Route exact path = '/me/update' element={<UpdateProfile />} />}
             {user && <Route exact path = '/password/update' element={<UpdatePassword />} />}
-            
+            <Route exact path = '/password/forgot' element={<ForgotPassword />} />
+            <Route exact path = '/password/reset/:token' element={<ResetPassword />} />
+            <Route exact path = '/cart' element={<Cart />} />
           </Routes>
         <Footer />
       </Router>
