@@ -13,7 +13,7 @@ import { logout } from "../../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 
 function UserOptions({user}) {
-
+    const { cartItems } = useSelector((state) => state.cart);
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
     const alert = useAlert();
@@ -23,6 +23,12 @@ function UserOptions({user}) {
         { icon: <ListAltIcon />, name: "Orders", func: orders },
         { icon: <PersonIcon />, name: "Profile", func: account },
         { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
+        { icon: 
+          <ShoppingCartIcon
+          style={{ color: cartItems.length > 0 ? "tomato" : "unset" }}
+        />, 
+        
+        name: `Cart(${cartItems.length})`, func: cart },
       ];
 
     //adds to the option array if the user is an admin
