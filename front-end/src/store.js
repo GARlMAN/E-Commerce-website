@@ -15,16 +15,20 @@ const reducer = combineReducers({
     cart: cartReducer
 });
 
+//initial state is loading and after reload it's staying preserved if it's cart or shippnig info
 let initialState = {
   cart: {
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
-      : []
-
-  }
-
+      : [],
+    shippingInfo: localStorage.getItem("shippingInfo")
+      ? JSON.parse(localStorage.getItem("shippingInfo"))
+      : {},
+  },
 };
 
+
+//thunk middle wear
 const middleware = [thunk];
 
 const store = createStore(

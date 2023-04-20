@@ -1,8 +1,15 @@
 
 const express = require("express");
 const cors = require("cors");
+const dotenv = require("dotenv");
 //set up express 
 const app = express();
+
+// config
+dotenv.config({path:"backend/config/config.env"});
+
+
+
 const fileUpload = require("express-fileupload");
 
 app.use(cors())
@@ -22,11 +29,13 @@ app.use(cookieParser());
 //Route imports
 const prodcts = require("./routes/productRoute.js");
 const user = require("./routes/userRoutes.js");
-const order = require("./routes/orderRoute.js")
+const order = require("./routes/orderRoute.js");
+const payment = require("./routes/paymentRoute");
 app.use("/api/v1", prodcts);
 app.use("/api/v1", user);
 app.use("/api/v1", order);
-//Middle wear for errosr
+app.use("/api/v1", payment);
+//Middle wear for errosr 
 app.use(errorMiddleWear);
 
 module.exports = app;

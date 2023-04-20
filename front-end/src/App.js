@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import WebFont from "webfontloader";
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import Header from './component/layout/Header/Header.js';
 import Footer from './component/layout/Footer/Footer.js';
@@ -24,13 +24,29 @@ import UpdatePassword from "./component/User/UpdatePassword.jsx";
 import ForgotPassword from "./component/User/ForgotPassword.jsx"; 
 import ResetPassword from "./component/User/ResetPassword.jsx";
 import Cart from "./component/Cart/Cart.jsx";
+import Shipping from "./component/Cart/Shipping.jsx";
+import ConfirmOrder from "./component/Cart/ConfirmOrder.jsx";
+import Payment from "./component/Cart/Payment.jsx";
+import axios from "axios"
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 
 function App() {
   //accesing the 
-  
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
+  //stripe key use state
+  const [stripeApiKey, setStripeApiKey] = useState("");
   const dispatch = useDispatch();
+
+  //getting the stripe api key from config
+  async function getStripeApiKey() {
+    const { data } = await axios.get("/api/v1/stripeapikey");
+
+    setStripeApiKey(data.stripeApiKey);
+  }
+
+
 
   //use effect
   useEffect(() => {
@@ -42,6 +58,7 @@ function App() {
 
       
        dispatch(loadUser());
+       getStripeApiKey();
     
   }, [dispatch]);
 
@@ -67,6 +84,11 @@ function App() {
             <Route exact path = '/password/forgot' element={<ForgotPassword />} />
             <Route exact path = '/password/reset/:token' element={<ResetPassword />} />
             <Route exact path = '/cart' element={<Cart />} />
+            <Route exact path = '/shipping' element={<Shipping />} />
+            <Route exact path = '/order/confirm' element={<ConfirmOrder />} />
+              <Route exact path = '/process/payment' element={<Payment key={stripeApiKey}/>} />
+
+            
           </Routes>
         <Footer />
       </Router>
