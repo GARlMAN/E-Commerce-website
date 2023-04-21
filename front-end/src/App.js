@@ -27,24 +27,19 @@ import Cart from "./component/Cart/Cart.jsx";
 import Shipping from "./component/Cart/Shipping.jsx";
 import ConfirmOrder from "./component/Cart/ConfirmOrder.jsx";
 import Payment from "./component/Cart/Payment.jsx";
-import axios from "axios"
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import OrderSuccess from "./component/Cart/OrderSuccess";
+
+
 
 
 function App() {
   //accesing the 
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
   //stripe key use state
-  const [stripeApiKey, setStripeApiKey] = useState("");
+  
   const dispatch = useDispatch();
 
-  //getting the stripe api key from config
-  async function getStripeApiKey() {
-    const { data } = await axios.get("/api/v1/stripeapikey");
 
-    setStripeApiKey(data.stripeApiKey);
-  }
 
 
 
@@ -58,7 +53,7 @@ function App() {
 
       
        dispatch(loadUser());
-       getStripeApiKey();
+
     
   }, [dispatch]);
 
@@ -86,7 +81,7 @@ function App() {
             <Route exact path = '/cart' element={<Cart />} />
             <Route exact path = '/shipping' element={<Shipping />} />
             <Route exact path = '/order/confirm' element={<ConfirmOrder />} />
-              <Route exact path = '/process/payment' element={<Payment key={stripeApiKey}/>} />
+              <Route exact path = '/process/payment' element={<Payment />} />
 
             
           </Routes>
