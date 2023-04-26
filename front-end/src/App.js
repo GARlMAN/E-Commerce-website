@@ -26,10 +26,12 @@ import ResetPassword from "./component/User/ResetPassword.jsx";
 import Cart from "./component/Cart/Cart.jsx";
 import Shipping from "./component/Cart/Shipping.jsx";
 import ConfirmOrder from "./component/Cart/ConfirmOrder.jsx";
-import Payment from "./component/Cart/Payment.jsx";
-import OrderSuccess from "./component/Cart/OrderSuccess";
-
-
+import PaymentMiddlewear from "./component/Middlewear/PaymentMiddlewear.jsx";
+import OrderSuccess from './component/Cart/OrderSuccess';
+import MyOrders from "./component/Order/MyOrders.jsx";
+import OrderDetails from "./component/Order/OrderDetails.jsx";
+import Dashboard from "./component/Admin/Dashboard.jsx";
+import ProductList from "./component/Admin/ProductList.jsx";
 
 
 function App() {
@@ -81,9 +83,12 @@ function App() {
             <Route exact path = '/cart' element={<Cart />} />
             <Route exact path = '/shipping' element={<Shipping />} />
             <Route exact path = '/order/confirm' element={<ConfirmOrder />} />
-              <Route exact path = '/process/payment' element={<Payment />} />
-
-            
+            <Route exact path = '/process/payment' element={<PaymentMiddlewear />} />
+            <Route exact path = "/success" element={<OrderSuccess />} />
+            {user && <Route exact path = "/orders" element={<MyOrders />} /> }
+            <Route exact path = "/order/:id" element={<OrderDetails />} />
+            <Route exact path = "/admin/dashboard" element={<Dashboard />} /> 
+            <Route exact path = "/admin/products" element={<ProductList />} /> 
           </Routes>
         <Footer />
       </Router>

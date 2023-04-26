@@ -110,6 +110,7 @@ const Payment = ({ history }) => {
   };
 
   useEffect(() => {
+
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
@@ -117,49 +118,36 @@ const Payment = ({ history }) => {
   }, [dispatch, error, alert]);
 
 
-  const [stripeApiKey, setStripeApiKey] = useState("");
-  //getting the stripe api key from config
-  async function getStripeApiKey() {
-    const { data } = await axios.get("/api/v1/stripeapikey");
-
-    setStripeApiKey(data.stripeApiKey);
-  }
-  useEffect(() => {
-
-    getStripeApiKey();
-  })
 
 
   return (
     <Fragment>
       <MetaData title="Payment" />
       <CheckoutSteps activeStep={2} />
-      <Elements stripe={loadStripe(stripeApiKey)}>
-      <div className="paymentContainer">
-        <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
-          <Typography>Card Info</Typography>
-          <div>
-            <CreditCardIcon />
-            <CardNumberElement className="paymentInput" />
-          </div>
-          <div>
-            <EventIcon />
-            <CardExpiryElement className="paymentInput" />
-          </div>
-          <div>
-            <VpnKeyIcon />
-            <CardCvcElement className="paymentInput" />
-          </div>
+        <div className="paymentContainer">
+          <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
+            <Typography>Card Info</Typography>
+            <div>
+              <CreditCardIcon />
+              <CardNumberElement className="paymentInput" />
+            </div>
+            <div>
+              <EventIcon />
+              <CardExpiryElement className="paymentInput" />
+            </div>
+            <div>
+              <VpnKeyIcon />
+              <CardCvcElement className="paymentInput" />
+            </div>
 
-          <input
-            type="submit"
-            value={`Pay - ₹${orderInfo && orderInfo.totalPrice}`}
-            ref={payBtn}
-            className="paymentFormBtn"
-          />
-        </form>
-      </div>
-      </Elements>
+            <input
+              type="submit"
+              value={`Pay - ₹${orderInfo && orderInfo.totalPrice}`}
+              ref={payBtn}
+              className="paymentFormBtn"
+            />
+          </form>
+        </div>
     </Fragment>
   );
 };

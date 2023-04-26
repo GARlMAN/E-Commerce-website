@@ -10,8 +10,8 @@ const router = express.Router();
 
 
 router.route("/products").get(getAllProducts);
-
-
+//admin all prodcuts
+router.route("/admin/products").get(isAuthenticatedUser, authorizeRoles("admin"), getAllProducts);
 router.route("/admin/products/new").post(isAuthenticatedUser, authorizeRoles("admin"),  createProducts);
 
 
