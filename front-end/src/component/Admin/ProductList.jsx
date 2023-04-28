@@ -4,15 +4,17 @@ import "./productList.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
+  deleteProduct,
   getAdminProduct,
 } from "../../actions/productAction";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { Button } from "@material-ui/core";
 import MetaData from "../layout/MetaData";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SideBar from "./Sidebar";
+import { DELETE_PRODUCT_RESET } from "../../constants/productConstants";
 
 function ProductList() {
     const dispatch = useDispatch();
@@ -20,15 +22,33 @@ function ProductList() {
     const alert = useAlert();
   
     const { error, prodcuts } = useSelector((state) => state.products);
-
+    const { error: deleteError, isDeleted } = useSelector(
+      (state) => state.product
+    );
+  
+    const deleteProductHandler = (id) => {
+      dispatch(deleteProduct(id));
+    };
+    const navigate = useNavigate()
     useEffect(() => {
-        if (error) {
-          alert.error(error);
-          dispatch(clearErrors());
-        }
-
-        dispatch(getAdminProduct());
-    }, [dispatch, error, alert])
+      if (error) {
+        alert.error(error);
+        dispatch(clearErrors());
+      }
+  
+      if (deleteError) {
+        alert.error(deleteError);
+        dispatch(clearErrors());
+      }
+  
+      if (isDeleted) {
+        alert.success("Product Deleted Successfully");
+        navigate("/admin/dashboard");
+        dispatch({ type: DELETE_PRODUCT_RESET });
+      }
+  
+      dispatch(getAdminProduct());
+    }, [dispatch, alert, error, deleteError, navigate, isDeleted]);
 
 
 
@@ -72,7 +92,10 @@ function ProductList() {
                 </Link>
     
                 <Button
-                >
+                onClick={() =>
+                  deleteProductHandler(params.getValue(params.id, "id"))
+                }
+              >
                   <DeleteIcon />
                 </Button>
               </Fragment>

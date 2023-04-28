@@ -1,7 +1,8 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 // import Product from "./component/Home/Product";
-import {productReducer, productDetailsReducer, newReviewReducer} from "./reducers/productReducer.js"
+import {productsReducer, productDetailsReducer, newReviewReducer, newProductReducer,
+        productReducer} from "./reducers/productReducer.js"
 import { composeWithDevTools } from "redux-devtools-extension";
 import { profileReducer, userReducer, forgotPasswordReducer } from "./reducers/userReducer.js";
 import { cartReducer } from "./reducers/cartReducer.js";
@@ -9,7 +10,7 @@ import { newOrderReducer, myOrdersReducer, orderDetailsReducer } from "./reducer
 
 //combining all reducers
 const reducer = combineReducers({
-    products: productReducer,
+    products: productsReducer,
     productDetails: productDetailsReducer,
     user: userReducer,
     profile: profileReducer,
@@ -18,7 +19,9 @@ const reducer = combineReducers({
     newOrder: newOrderReducer,
     myOrders: myOrdersReducer,
     orderDetail: orderDetailsReducer,
-    newReview: newReviewReducer
+    newReview: newReviewReducer,
+    newProduct: newProductReducer,
+    product: productReducer
 });
 
 //initial state is loading and after reload it's staying preserved if it's cart or shippnig info

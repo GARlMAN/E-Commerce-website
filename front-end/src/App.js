@@ -32,7 +32,7 @@ import MyOrders from "./component/Order/MyOrders.jsx";
 import OrderDetails from "./component/Order/OrderDetails.jsx";
 import Dashboard from "./component/Admin/Dashboard.jsx";
 import ProductList from "./component/Admin/ProductList.jsx";
-
+import NewProduct from "./component/Admin/NewProduct";
 
 function App() {
   //accesing the 
@@ -88,7 +88,8 @@ function App() {
             {user && <Route exact path = "/orders" element={<MyOrders />} /> }
             <Route exact path = "/order/:id" element={<OrderDetails />} />
             <Route exact path = "/admin/dashboard" element={<Dashboard />} /> 
-            <Route exact path = "/admin/products" element={<ProductList />} /> 
+            <Route exact path = "/admin/products" element={<ProductList />} />  
+            <Route exact path = "/admin/product" element={<NewProduct />} />
           </Routes>
         <Footer />
       </Router>

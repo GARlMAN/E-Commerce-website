@@ -1,15 +1,34 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import Sidebar from './Sidebar'
 import "./dashboard.css"
 import { Link } from 'react-router-dom'
 import { Typography } from "@material-ui/core";
 import { Doughnut, Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
-
 import { useSelector, useDispatch } from "react-redux";
+import { getAdminProduct } from "../../actions/productAction";
+import MetaData from "../layout/MetaData";
 
 
 function Dashboard() {
+  const dispatch = useDispatch();
+
+  let outOfStock = 0;
+  const { prodcuts } = useSelector((state) => state.products);
+  const a = useSelector((state) => state.products);
+  let len = prodcuts ? prodcuts.length : 0;
+
+  //checking the amount of things out of stock
+  prodcuts &&
+  prodcuts.forEach((item) => {
+      if (item.Stock === 0) {
+        outOfStock += 1;
+      }
+    });
+    useEffect(() => {
+      dispatch(getAdminProduct());
+    }, [dispatch]);
+
     //state of the line chart
     const lineState = {
         labels: ["Initial Amount", "Amount Earned"],
@@ -29,7 +48,7 @@ function Dashboard() {
           {
             backgroundColor: ["#00A6B4", "#6800B4"],
             hoverBackgroundColor: ["#4B5000", "#35014F"],
-            data: [3, 7 - 3],
+            data: [outOfStock, len - outOfStock],
           },
         ],
       };
@@ -50,7 +69,7 @@ function Dashboard() {
                 <div className="dashboardSummaryBox2">
                     <Link to="/admin/products">
                         <p>Product</p>
-                        <p>5</p>
+                        <p>{len}</p>
                     </Link>
                     <Link to="/admin/orders">
                         <p>Orders</p>
