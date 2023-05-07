@@ -6,7 +6,7 @@ import {productsReducer, productDetailsReducer, newReviewReducer, newProductRedu
 import { composeWithDevTools } from "redux-devtools-extension";
 import { profileReducer, userReducer, forgotPasswordReducer } from "./reducers/userReducer.js";
 import { cartReducer } from "./reducers/cartReducer.js";
-import { newOrderReducer, myOrdersReducer, orderDetailsReducer } from "./reducers/orderReducer.js";
+import { newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer } from "./reducers/orderReducer.js";
 
 //combining all reducers
 const reducer = combineReducers({
@@ -21,7 +21,9 @@ const reducer = combineReducers({
     orderDetail: orderDetailsReducer,
     newReview: newReviewReducer,
     newProduct: newProductReducer,
-    product: productReducer
+    product: productReducer,
+    allOrders: allOrdersReducer,
+    order: orderReducer,
 });
 
 //initial state is loading and after reload it's staying preserved if it's cart or shippnig info

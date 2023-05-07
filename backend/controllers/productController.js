@@ -10,14 +10,15 @@ const cloudinary = require("cloudinary")
 //Create Products -- Admin
 exports.createProducts = CatchAsyncError (async (req, res) => {
     req.body.user = req.user.id;
+    
     //getting images 
     let images = []
-    if (typeof req.body.images === "string") {
+    if (typeof req.body.images === "string") { 
         images.push(req.body.images);
       } else {
         images = req.body.images;
       }
-    
+     
       //adding images to cloudinary
       const imagesLinks = [];
       //sending all iamges one by one

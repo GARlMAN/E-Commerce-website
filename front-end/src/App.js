@@ -32,7 +32,11 @@ import MyOrders from "./component/Order/MyOrders.jsx";
 import OrderDetails from "./component/Order/OrderDetails.jsx";
 import Dashboard from "./component/Admin/Dashboard.jsx";
 import ProductList from "./component/Admin/ProductList.jsx";
-import NewProduct from "./component/Admin/NewProduct";
+import NewProduct from "./component/Admin/NewProduct.jsx";
+import UpdateProduct from "./component/Admin/UpdateProduct.jsx";
+import OrderList from "./component/Admin/OrderList.jsx"; 
+import ProcessOrder from "./component/Admin/ProcessOrder.jsx";
+
 
 function App() {
   //accesing the 
@@ -40,10 +44,6 @@ function App() {
   //stripe key use state
   
   const dispatch = useDispatch();
-
-
-
-
 
   //use effect
   useEffect(() => {
@@ -90,6 +90,9 @@ function App() {
             <Route exact path = "/admin/dashboard" element={<Dashboard />} /> 
             <Route exact path = "/admin/products" element={<ProductList />} />  
             <Route exact path = "/admin/product" element={<NewProduct />} />
+            <Route exact path = "/admin/product/:id" element={<UpdateProduct />} /> 
+            <Route exact path = "/admin/orders" element={<OrderList />} />
+            <Route exact path = "/admin/order/:id" element={<ProcessOrder />} />
           </Routes>
         <Footer />
       </Router>

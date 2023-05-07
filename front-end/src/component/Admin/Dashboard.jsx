@@ -8,6 +8,7 @@ import Chart from 'chart.js/auto';
 import { useSelector, useDispatch } from "react-redux";
 import { getAdminProduct } from "../../actions/productAction";
 import MetaData from "../layout/MetaData";
+import { getAllOrders } from "../../actions/orderAction";
 
 
 function Dashboard() {
@@ -15,9 +16,10 @@ function Dashboard() {
 
   let outOfStock = 0;
   const { prodcuts } = useSelector((state) => state.products);
-  const a = useSelector((state) => state.products);
-  let len = prodcuts ? prodcuts.length : 0;
+  const { orders } = useSelector((state) => state.allOrders);
 
+  let len_product = prodcuts ? prodcuts.length : 0;
+  let len_orders = orders ? orders.length : 0;
   //checking the amount of things out of stock
   prodcuts &&
   prodcuts.forEach((item) => {
@@ -27,6 +29,7 @@ function Dashboard() {
     });
     useEffect(() => {
       dispatch(getAdminProduct());
+      dispatch(getAllOrders())
     }, [dispatch]);
 
     //state of the line chart
@@ -48,7 +51,7 @@ function Dashboard() {
           {
             backgroundColor: ["#00A6B4", "#6800B4"],
             hoverBackgroundColor: ["#4B5000", "#35014F"],
-            data: [outOfStock, len - outOfStock],
+            data: [outOfStock, len_product - outOfStock],
           },
         ],
       };
@@ -69,11 +72,11 @@ function Dashboard() {
                 <div className="dashboardSummaryBox2">
                     <Link to="/admin/products">
                         <p>Product</p>
-                        <p>{len}</p>
+                        <p>{len_product}</p>
                     </Link>
                     <Link to="/admin/orders">
                         <p>Orders</p>
-                        <p>sdfsdf</p>
+                        <p>{len_orders}</p>
                     </Link>
                     <Link to="/admin/users">
                         <p>Users</p>

@@ -51,7 +51,7 @@ exports.myOrders = catchAsyncErrors(async (req, res, next) => {
 
 // get all Orders -- Admin
 exports.getAllOrders = catchAsyncErrors(async (req, res, next) => {
-    const orders = await Order.find();
+    const orders = await Orders.find();
   
     let totalAmount = 0;
   
@@ -109,7 +109,7 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
 
   // delete Order -- Admin
 exports.deleteOrder = catchAsyncErrors(async (req, res, next) => {
-  const order = await Order.findById(req.params.id);
+  const order = await Orders.findById(req.params.id);
 
   if (!order) {
     return next(new ErrorHander("Order not found with this Id", 404));
