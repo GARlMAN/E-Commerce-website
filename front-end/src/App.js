@@ -36,6 +36,12 @@ import NewProduct from "./component/Admin/NewProduct.jsx";
 import UpdateProduct from "./component/Admin/UpdateProduct.jsx";
 import OrderList from "./component/Admin/OrderList.jsx"; 
 import ProcessOrder from "./component/Admin/ProcessOrder.jsx";
+import UsersList from "./component/Admin/UsersList.jsx";
+import UpdateUser from "./component/Admin/UpdateUser.jsx";
+import ProductReviews from "./component/Admin/ProductReviews.jsx";
+import Contact from "./component/layout/Contact/Contact.jsx";
+import About from "./component/layout/About/About.jsx";
+import NotFound from "./component/layout/Not Found/NotFound.jsx";
 
 
 function App() {
@@ -93,6 +99,11 @@ function App() {
             <Route exact path = "/admin/product/:id" element={<UpdateProduct />} /> 
             <Route exact path = "/admin/orders" element={<OrderList />} />
             <Route exact path = "/admin/order/:id" element={<ProcessOrder />} />
+            <Route exact path = "/admin/users" element={<UsersList />} />
+            <Route exact path = "/admin/user/:id" element={<UpdateUser />} />
+            <Route exact path = "/admin/reviews" element={<ProductReviews />} />
+            <Route exact path="/contact" element={<Contact />} />
+            <Route exact path="/about" element={<About />} />
           </Routes>
         <Footer />
       </Router>

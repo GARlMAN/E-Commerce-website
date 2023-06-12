@@ -18,6 +18,7 @@ import "./processOrder.css";
 
 const ProcessOrder = ({ history }) => {
   const { order, error, loading } = useSelector((state) => state.orderDetail);
+  const { error: updateError, isUpdated } = useSelector((state) => state.order);
   const {id} = useParams();
   const updateOrderSubmitHandler = (e) => {
     e.preventDefault();
@@ -36,13 +37,21 @@ const ProcessOrder = ({ history }) => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
+        alert.error(error);
+        dispatch(clearErrors());
+      }
+      if (updateError) {
+        alert.error(updateError);
+        dispatch(clearErrors());
+      }
+      if (isUpdated) {
+        alert.success("Order Updated Successfully");
+        dispatch({ type: UPDATE_ORDER_RESET });
+      }
 
 
     dispatch(getOrderDetails(id));
-  }, [dispatch, alert, error, id]);
+  }, [dispatch, alert, error, id, isUpdated, updateError]);
 
   return (
     <Fragment>

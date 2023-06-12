@@ -70,7 +70,7 @@ exports.getAllOrders = catchAsyncErrors(async (req, res, next) => {
 
 // update Order Status -- Admin
 exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
-    const order = await Order.findById(req.params.id);
+    const order = await Orders.findById(req.params.id);
   
     if (!order) {
       return next(new ErrorHander("Order not found with this Id", 404));
