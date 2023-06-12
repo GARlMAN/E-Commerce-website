@@ -42,7 +42,20 @@ import ProductReviews from "./component/Admin/ProductReviews.jsx";
 import Contact from "./component/layout/Contact/Contact.jsx";
 import About from "./component/layout/About/About.jsx";
 import NotFound from "./component/layout/Not Found/NotFound.jsx";
+import axios from 'axios';
 
+const apiBaseUrl = 'https://ecommerece-backend.onrender.com'; // Replace with the correct base URL for your backend API
+
+// Example API request
+axios.get(`${apiBaseUrl}/api/data`)
+  .then(response => {
+    // Handle the API response
+    console.log(response.data);
+  })
+  .catch(error => {
+    // Handle errors
+    console.error(error);
+  });
 
 function App() {
   //accesing the 
