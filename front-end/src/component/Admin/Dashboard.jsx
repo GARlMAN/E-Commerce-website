@@ -15,14 +15,14 @@ function Dashboard() {
   const dispatch = useDispatch();
 
   let outOfStock = 0;
-  const { prodcuts } = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.products);
   const { orders } = useSelector((state) => state.allOrders);
 
-  let len_product = prodcuts ? prodcuts.length : 0;
+  let len_product = products ? products.length : 0;
   let len_orders = orders ? orders.length : 0;
   //checking the amount of things out of stock
-  prodcuts &&
-  prodcuts.forEach((item) => {
+  products &&
+  products.forEach((item) => {
       if (item.Stock === 0) {
         outOfStock += 1;
       }

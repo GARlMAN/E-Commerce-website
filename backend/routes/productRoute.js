@@ -14,7 +14,7 @@ router.route("/products").get(getAllProducts);
 router.route("/admin/products").get(isAuthenticatedUser, authorizeRoles("admin"), getAllProducts);
 router.route("/admin/product/new").post(isAuthenticatedUser, authorizeRoles("admin"),  createProducts);
 
-
+ 
 
 router.route("/admin/products/:id")
     .put(isAuthenticatedUser, authorizeRoles("admin"), updateProducts)

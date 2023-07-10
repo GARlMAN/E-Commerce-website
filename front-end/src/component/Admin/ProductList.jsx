@@ -21,7 +21,7 @@ function ProductList() {
 
     const alert = useAlert();
   
-    const { error, prodcuts } = useSelector((state) => state.products);
+    const { error, products } = useSelector((state) => state.products);
     const { error: deleteError, isDeleted } = useSelector(
       (state) => state.product
     );
@@ -106,8 +106,8 @@ function ProductList() {
     
       const rows = [];
     
-      prodcuts &&
-      prodcuts.forEach((item) => {
+      products &&
+      products.forEach((item) => {
           rows.push({
             id: item._id,
             stock: item.Stock,
