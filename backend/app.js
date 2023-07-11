@@ -17,9 +17,10 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 app.set('trust proxy', 1);
 app.use(cors({
-  origin: 'https://master--tangerine-belekoy-7ad0ca.netlify.app',
+  origin: "https://master--tangerine-belekoy-7ad0ca.netlify.app",
   credentials: true,
 }));
+app.set("trust proxy", 1);
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 app.use(fileUpload());
