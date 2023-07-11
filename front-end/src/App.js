@@ -52,7 +52,7 @@ function App() {
   
   axios.defaults.withCredentials = true;
   axios.defaults.baseURL = 'https://ecommerece-backend.onrender.com'
-
+  axios.defaults.credentials = 'include'
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
   //stripe key use state
   
