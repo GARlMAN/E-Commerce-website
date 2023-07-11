@@ -91,11 +91,13 @@ export const register = (userData) => async (dispatch) => {
 
 //Load user
 // Load User
-export const loadUser = () => async (dispatch) => {
+export const loadUser = () => async (dispatch) => { 
   try {
     dispatch({ type: LOAD_USER_REQUEST });
 
-    const { data } = await axios.get(`/api/v1/me`);
+    const { data } = await axios.get(`/api/v1/me`, null, {
+      withCredentials: true
+    });
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
