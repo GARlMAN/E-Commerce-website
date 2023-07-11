@@ -2,6 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+
 //set up express 
 const app = express();
 
@@ -11,8 +12,14 @@ dotenv.config({path:"backend/config/config.env"});
 
 
 const fileUpload = require("express-fileupload");
-
-app.use(cors())
+//cookie paser to get cookies
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+app.set('trust proxy', 1);
+app.use(cors({
+  origin: 'https://ecommerece-48lm.onrender.com',
+  credentials: true,
+}));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 app.use(fileUpload());
@@ -21,9 +28,7 @@ const errorMiddleWear = require("./middlewear/error")
 const bodyParser = require("body-parser")
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//cookie paser to get cookies
-const cookieParser = require("cookie-parser");
-app.use(cookieParser());
+
 
 
 //Route imports

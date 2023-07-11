@@ -42,13 +42,17 @@ import ProductReviews from "./component/Admin/ProductReviews.jsx";
 import Contact from "./component/layout/Contact/Contact.jsx";
 import About from "./component/layout/About/About.jsx";
 import NotFound from "./component/layout/Not Found/NotFound.jsx";
-
+import axios from 'axios';
 
 
 
 
 function App() {
   //accesing the 
+  
+  axios.defaults.withCredentials = true;
+  axios.defaults.baseURL = 'https://ecommerece-backend.onrender.com'
+
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
   //stripe key use state
   
