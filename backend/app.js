@@ -19,6 +19,7 @@ app.set('trust proxy', 1);
 app.use(cors({
   origin: "https://master--tangerine-belekoy-7ad0ca.netlify.app",
   credentials: true,
+  exposedHeaders: ["Set-Cookie"] 
 }));
 app.set("trust proxy", 1);
 app.use(express.urlencoded({extended: true}));
