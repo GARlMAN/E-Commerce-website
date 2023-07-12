@@ -10,6 +10,7 @@ const sendToken = (user, statusCode, res) => {
     ),
     httpOnly: true,
     secure: true, // Ensure the cookie is only sent over HTTPS
+    sameSite: 'None'
   };
   console.log(token);
   res
