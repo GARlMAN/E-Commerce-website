@@ -8,7 +8,7 @@ const User = require("../schema/userSchema");
 //check if user is logged in or not
 exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next)=> {
     const {token} = req.cookies;
-
+    console.log(token);
     if(!token){
         return next(new ErrorHandler("Please login to acess this resource",401))
     }
